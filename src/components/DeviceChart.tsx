@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { MeasurementData } from "@/data/mockData";
 import { format } from "date-fns";
 
@@ -48,100 +48,32 @@ export function DeviceChart({ data, title }: DeviceChartProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="flow" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="flow">Flow Rate</TabsTrigger>
-            <TabsTrigger value="volume">Volume</TabsTrigger>
-            <TabsTrigger value="pressure">Pressure</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="flow" className="space-y-4">
-            <div className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-grid))" />
-                  <XAxis 
-                    dataKey="time" 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <YAxis 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Area
-                    type="monotone"
-                    dataKey="flowRate"
-                    stroke="hsl(var(--chart-primary))"
-                    fill="hsl(var(--chart-primary) / 0.2)"
-                    strokeWidth={2}
-                    name="Flow Rate"
-                    unit="mL/min"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="volume" className="space-y-4">
-            <div className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-grid))" />
-                  <XAxis 
-                    dataKey="time" 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <YAxis 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="volume"
-                    stroke="hsl(var(--chart-secondary))"
-                    strokeWidth={2}
-                    dot={{ fill: "hsl(var(--chart-secondary))", strokeWidth: 2, r: 3 }}
-                    name="Total Volume"
-                    unit="mL"
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="pressure" className="space-y-4">
-            <div className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-grid))" />
-                  <XAxis 
-                    dataKey="time" 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <YAxis 
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={12}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Area
-                    type="monotone"
-                    dataKey="pressure"
-                    stroke="hsl(var(--chart-tertiary))"
-                    fill="hsl(var(--chart-tertiary) / 0.2)"
-                    strokeWidth={2}
-                    name="Pressure"
-                    unit="mmHg"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </TabsContent>
-        </Tabs>
+        <div className="h-[300px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-grid))" />
+              <XAxis 
+                dataKey="time" 
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+              />
+              <YAxis 
+                stroke="hsl(var(--muted-foreground))"
+                fontSize={12}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Line
+                type="monotone"
+                dataKey="volume"
+                stroke="hsl(var(--chart-secondary))"
+                strokeWidth={2}
+                dot={{ fill: "hsl(var(--chart-secondary))", strokeWidth: 2, r: 3 }}
+                name="Total Volume"
+                unit="mL"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </CardContent>
     </Card>
   );

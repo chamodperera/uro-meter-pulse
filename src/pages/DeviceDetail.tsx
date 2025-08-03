@@ -10,7 +10,6 @@ import {
   Activity, 
   Battery, 
   MapPin, 
-  Droplets, 
   Clock, 
   AlertTriangle,
   Gauge,
@@ -44,22 +43,20 @@ export default function DeviceDetail() {
     const interval = setInterval(() => {
       // Update device data
       if (device.status === 'active') {
-        const flowVariation = (Math.random() - 0.5) * 2;
         const volumeIncrement = Math.random() * 1;
         
         setDevice(prev => prev ? {
           ...prev,
           lastUpdate: new Date().toISOString(),
-          currentFlowRate: Math.max(0, prev.currentFlowRate + flowVariation),
           totalVolume: prev.totalVolume + volumeIncrement
         } : null);
 
         // Add new measurement point
         const newMeasurement: MeasurementData = {
           timestamp: new Date().toISOString(),
-          flowRate: Math.max(0, device.currentFlowRate + flowVariation),
+          flowRate: 0,
           volume: device.totalVolume + volumeIncrement,
-          pressure: Math.max(0, 15 + (Math.random() - 0.5) * 5)
+          pressure: 0
         };
 
         setMeasurementData(prev => [...prev.slice(-287), newMeasurement]); // Keep last 24 hours (288 points)
@@ -142,7 +139,7 @@ export default function DeviceDetail() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Device Info & Current Metrics */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Device Information */}
           <Card className="medical-card">
             <CardHeader>
@@ -178,30 +175,6 @@ export default function DeviceDetail() {
             </CardContent>
           </Card>
 
-          {/* Current Flow Rate */}
-          <Card className="medical-card">
-            <CardHeader>
-              <CardTitle className="medical-subtitle flex items-center gap-2">
-                <Droplets className="w-5 h-5 text-chart-primary" />
-                Current Flow Rate
-              </CardTitle>
-              <CardDescription>Real-time measurement</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-chart-primary">
-                  {device.currentFlowRate.toFixed(1)}
-                </div>
-                <div className="text-sm text-muted-foreground">mL/min</div>
-                {latestMeasurement && (
-                  <div className="text-xs text-muted-foreground">
-                    Previous: {latestMeasurement.flowRate.toFixed(1)} mL/min
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
           {/* Total Volume */}
           <Card className="medical-card">
             <CardHeader>
@@ -219,7 +192,7 @@ export default function DeviceDetail() {
                 <div className="text-sm text-muted-foreground">mL</div>
                 {latestMeasurement && (
                   <div className="text-xs text-muted-foreground">
-                    Pressure: {latestMeasurement.pressure.toFixed(1)} mmHg
+                    Last reading: {latestMeasurement.volume.toFixed(1)} mL
                   </div>
                 )}
               </div>
@@ -267,7 +240,7 @@ export default function DeviceDetail() {
         {/* Charts */}
         <DeviceChart 
           data={measurementData} 
-          title={`${device.name} - 24 Hour Monitoring Data`}
+          title={`${device.name} - Volume Monitoring (24 Hours)`}
         />
       </main>
     </div>
