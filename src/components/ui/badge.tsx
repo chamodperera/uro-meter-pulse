@@ -15,6 +15,11 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
+        // Medical status variants
+        active: "border-transparent bg-status-active text-status-active-foreground",
+        warning: "border-transparent bg-status-warning text-status-warning-foreground",
+        error: "border-transparent bg-status-error text-status-error-foreground",
+        offline: "border-transparent bg-status-offline text-status-offline-foreground",
       },
     },
     defaultVariants: {

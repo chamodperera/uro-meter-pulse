@@ -24,9 +24,11 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				surface: 'hsl(var(--surface))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					muted: 'hsl(var(--primary-muted))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -50,7 +52,25 @@ export default {
 				},
 				card: {
 					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
+					foreground: 'hsl(var(--card-foreground))',
+					border: 'hsl(var(--card-border))'
+				},
+				status: {
+					active: 'hsl(var(--status-active))',
+					'active-foreground': 'hsl(var(--status-active-foreground))',
+					warning: 'hsl(var(--status-warning))',
+					'warning-foreground': 'hsl(var(--status-warning-foreground))',
+					error: 'hsl(var(--status-error))',
+					'error-foreground': 'hsl(var(--status-error-foreground))',
+					offline: 'hsl(var(--status-offline))',
+					'offline-foreground': 'hsl(var(--status-offline-foreground))'
+				},
+				chart: {
+					primary: 'hsl(var(--chart-primary))',
+					secondary: 'hsl(var(--chart-secondary))',
+					tertiary: 'hsl(var(--chart-tertiary))',
+					grid: 'hsl(var(--chart-grid))',
+					background: 'hsl(var(--chart-background))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
